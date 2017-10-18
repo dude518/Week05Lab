@@ -9,7 +9,7 @@
 <c:import url="/includes/header.html"/>
 <h1>Shopping List</h1>
 <div>
-    <form action="shoppinglist" method="post">
+    <form action="shoppinglist?action=user" method="get">
         Username: <input type="text" name="username">
         <input typ="submit" name="submit" value="Register name">
     </form>
