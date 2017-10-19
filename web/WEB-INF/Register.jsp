@@ -9,9 +9,9 @@
 <c:import url="/includes/header.html"/>
 <h1>Shopping List</h1>
 <div>
-    <form action="shoppinglist?action=user" method="get">
+    <form action="shoppinglist?action=register" method="POST">
         Username: <input type="text" name="username">
-        <input typ="submit" name="submit" value="Register name">
+        <input type="submit" value="Resgister">
     </form>
 </div>
 <c:import url="/includes/footer.html"/>

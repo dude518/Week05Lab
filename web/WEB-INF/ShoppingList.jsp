@@ -16,12 +16,19 @@
         <input type="submit" name="submit" value="Add">
     </form>
 </div>
+</br>
 <div>
-    <table>
-        <c:if test="">
-
-        </c:if>
-    </table>
+    <c:if test="${items.size() > 0}">
+        <form action="shoppinglist?action=delete" method="POST">
+            <c:forEach var="item" items="${items}">
+                <input type="radio" name="itemlist" value="${item}">${item}
+                </br>
+            </c:forEach>
+            
+            <input type="submit" value="Delete">
+        </form>
+        
+    </c:if>
 </div>
 
 <c:import url="/includes/footer.html"/>

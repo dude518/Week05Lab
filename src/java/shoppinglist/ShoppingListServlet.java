@@ -32,10 +32,10 @@ public class ShoppingListServlet extends HttpServlet {
             return;
         }
         String action = request.getParameter("action");
-        if(action.equals("logout"))
+        if(action != null && action.equals("logout"))
         {
-            session.removeAttribute(user);
-            getServletContext().getRequestDispatcher("/WEB-INF/ShoppingList.jsp").forward(request, response);
+            session.removeAttribute("username");
+            getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
             return;
         }
         request.setAttribute("username", user);
@@ -50,26 +50,31 @@ public class ShoppingListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ArrayList<String> items = (ArrayList<String>)session.getAttribute("items");
         
-        if(items == null || items.isEmpty())
-        {
-            items = new ArrayList<>();
-        }
-        
-        if(action.equals("additem"))
+        if(action.equals("add"))
         {
             String item = request.getParameter("additem");
             items.add(item);
             session.setAttribute("items", items);
+            response.sendRedirect("shoppinglist");
+            return;
         }
-        else if(action.equals("removeitem"))
+        else if(action.equals("delete"))
         {
-            String item = request.getParameter("remove");
+            String item = request.getParameter("itemlist");
+            
             items.remove(item);
             session.setAttribute("items", items);
+            response.sendRedirect("shoppinglist");
+            return;
         }
-        else if(action.equals("logout"))
+        else if(action.equals("register"))
         {
-            
+            String username = request.getParameter("username");
+            items = new ArrayList<>();
+            session.setAttribute("username", username);
+            session.setAttribute("items", items);
+            response.sendRedirect("shoppinglist");
+            return;
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/ShoppingList.jsp").forward(request, response);
